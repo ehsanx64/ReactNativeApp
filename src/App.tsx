@@ -12,7 +12,13 @@ const Stack = createStackNavigator();
 const App: () => void = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        headerMode="screen"
+        screenOptions={{
+          headerTintColor: 'white',
+          headerStyle: {backgroundColor: 'tomato'},
+        }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
           name="About"
