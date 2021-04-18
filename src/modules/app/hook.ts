@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {TAppState,TAppHook} from './types';
+import {TAppState, TAppHook} from './types';
 
 import * as actions from './actions';
 
