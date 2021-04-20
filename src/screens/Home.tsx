@@ -32,12 +32,14 @@ const Home = ({navigation}: any) => {
           <Button
             title="Friends"
             style={styles.mainMenuButton}
+            labelAlign="center"
             onPress={() => {
               navigation.navigate('Friends');
             }}
           />
           <Button
             title="About"
+            labelAlign="center"
             onPress={() => {
               navigation.navigate('About');
             }}
@@ -86,10 +88,12 @@ const styles = StyleSheet.create({
   mainMenu: {
     backgroundColor: bgColorDebug(isDebugging, 'white'),
     paddingVertical: 10,
+    paddingHorizontal: 50,
     flexGrow: 2,
   },
   mainMenuButton: {
     marginVertical: 10,
+    textAlign: 'center',
   },
 });
 
