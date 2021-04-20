@@ -1,81 +1,95 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {Text} from 'react-native';
+import {Image} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import Screen from '../components/Screen';
+import Button from '../components/Button';
+import {getTheme} from '../utils/style';
+import {bgColorDebug} from '../utils/tools';
 import {useApp} from '../modules/app/hook';
 
-const Friend = ({name, onClick}) => {
-  return (
-    <View style={styles.friendWrapper}>
-      <TouchableOpacity
-        onPress={() => {
-          onClick(name);
-          console.log('Clicked ' + name + '!');
-        }}>
-        <View style={styles.friend}>
-          <Text style={styles.friendName}>{name}</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
+const isDebugging: boolean = false;
 
 const Home = ({navigation}: any) => {
   const {app, setChosenOne} = useApp();
-  const renderer = ({item}) => <Friend name={item} onClick={setChosenOne} />;
+  const headerLogo = require('../assets/images/logo.png');
 
   return (
     <Screen>
-      <Text>Home Screen</Text>
-      <View>
-        <Text style={styles.heading}>My favorite friends:</Text>
-        <FlatList
-          renderItem={renderer}
-          data={app.friendList}
-          keyExtractor={item => item}
-        />
+      <View style={styles.wrapper}>
+        <View style={styles.homeHeader}>
+          <View style={styles.headerLogoWrapper}>
+            <Image source={headerLogo} style={styles.headerLogo} />
+          </View>
+          <View style={styles.headerTitleWrapper}>
+            <Text style={styles.header}>ReactNativeApp</Text>
+            <Text style={styles.subHeader}>ReactNative Playground</Text>
+          </View>
+        </View>
+
+        <View style={styles.mainMenu}>
+          <Button
+            title="Friends"
+            style={styles.mainMenuButton}
+            onPress={() => {
+              navigation.navigate('Friends');
+            }}
+          />
+          <Button
+            title="About"
+            onPress={() => {
+              navigation.navigate('About');
+            }}
+          />
+        </View>
       </View>
-      <View>
-        <Text style={styles.heading}>The chosen one:</Text>
-        <Text style={styles.chosenOneName}>{app.chosenOne}</Text>
-      </View>
-      <Button
-        title="Go to About"
-        color="tomato"
-        onPress={() => {
-          navigation.navigate('About');
-        }}
-      />
     </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  friendWrapper: {
-    padding: 5,
+  wrapper: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'space-between',
   },
-  friend: {
-    marginVertical: 0,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    backgroundColor: 'tomato',
-  },
-  friendName: {
-    fontSize: 15,
-  },
-  chosenOneName: {
-    fontSize: 20,
-  },
-  heading: {
+  homeHeader: {
     fontSize: 20,
     fontWeight: '600',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    flexGrow: 4,
+    paddingVertical: 20,
+  },
+  headerLogo: {
+    resizeMode: 'center',
+  },
+  headerLogoWrapper: {
+    backgroundColor: bgColorDebug(isDebugging, 'green'),
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerTitleWrapper: {},
+  header: {
+    fontSize: 30,
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  subHeader: {
+    fontSize: 16,
+    fontWeight: '600',
+    paddingHorizontal: 40,
+    textAlign: 'center',
+  },
+  mainMenu: {
+    backgroundColor: bgColorDebug(isDebugging, 'white'),
+    paddingVertical: 10,
+    flexGrow: 2,
+  },
+  mainMenuButton: {
+    marginVertical: 10,
   },
 });
 

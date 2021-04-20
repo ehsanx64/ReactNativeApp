@@ -1,12 +1,18 @@
 import React, {ReactElement} from 'react';
 import {StyleSheet, View} from 'react-native';
 
-const Screen: () => ReactElement = ({children}: any) => {
-  return <View style={styles.screenWrapper}>{children}</View>;
+interface Props {
+  children: any;
+}
+
+const Screen: React.FC<Props> = ({children}): ReactElement => {
+  return <View style={styles.wrapper}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
-  screenWrapper: {},
+  wrapper: {
+    flex: 1,
+  },
 });
 
 export default Screen;
