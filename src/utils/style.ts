@@ -12,7 +12,7 @@ export const extendStyles = (styles: object, override: object): any => {
 
 export const getTheme = (): any => {
   return {
-    fontSize: 20,
+    fontSize: 18,
     fgColor: 'white',
     bgColor: 'tomato',
   };
